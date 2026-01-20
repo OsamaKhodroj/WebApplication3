@@ -1,0 +1,87 @@
+﻿@using Domains.DTOs
+@model OpResult
+
+@* <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form asp-controller="User" asp-action="EditUser" method="post">
+            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">User Name</label>
+                <input type="text" class="form-control" value="@Model.Username" id="Username" name="Username" required placeholder="Osama Ahmad">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" value="@Model.Email" id="Email" name="Email" required placeholder="name@example.com">
+            </div> 
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary" value="Edit User" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div> *@
+
+
+
+<div class="col-xl">
+    <div class="card mb-6">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Enter User Information Details</h5>
+            <small class="text-muted float-end">User Info</small>
+        </div>
+        <div class="card-body">
+            @if (Model != null)
+            {
+                if (Model.Status == Domains.Enums.OpStatus.Success)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @Model.Message
+                    </div>
+                }
+                else if (Model.Status == Domains.Enums.OpStatus.Failed || Model.Status == Domains.Enums.OpStatus.AlreadyExists)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @Model.Message
+                    </div>
+                } 
+            }
+
+
+            <form asp-controller="User" asp-action="EditUser" method="post">
+                <input type="hidden" id="Id" name="Id" value="@Model.EditUserRequest.Id" />
+                <div class="mb-6">
+                    <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-fullname2" class="input-group-text">
+                            <i class="bx bx-user"></i>
+                        </span>
+                        <input type="text"
+                               class="form-control"
+                               value="@Model.EditUserRequest.Username" id="Username" name="Username"
+                               placeholder="John Doe"
+                               aria-label="John Doe"
+                               aria-describedby="basic-icon-default-fullname2" />
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="form-label" for="basic-icon-default-email">Email</label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                        <input type="text"
+                               value="@Model.EditUserRequest.Email" id="Email" name="Email"
+                               class="form-control"
+                               placeholder="john.doe"
+                               aria-label="john.doe"
+                               aria-describedby="basic-icon-default-email2" />
+                        <span id="basic-icon-default-email2" class="input-group-text">@@example.com</span>
+                    </div>
+                </div>
+                 
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

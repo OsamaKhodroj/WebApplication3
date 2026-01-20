@@ -1,0 +1,17 @@
+﻿@{
+    var userCountry = "SA";
+
+
+    switch (userCountry.ToLower())
+    {
+        case "jo":
+            Layout = "_LayoutJO";
+            break;
+        case "ksa":
+            Layout = "_LayoutKSA";
+            break;
+        default:
+            Layout = "_Layout";
+            break;
+    } 
+}

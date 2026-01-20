@@ -1,0 +1,80 @@
+﻿@using Domains.DTOs
+@model OpResult
+
+ 
+
+<div class="col-xl">
+    <div class="card mb-6">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Enter User Information Details</h5>
+            <small class="text-muted float-end">User Info</small>
+        </div>
+        <div class="card-body">
+            @if (Model != null)
+            {
+                if (Model.Status == Domains.Enums.OpStatus.Success)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @Model.Message
+                    </div>
+                }
+                else if (Model.Status == Domains.Enums.OpStatus.Failed || Model.Status == Domains.Enums.OpStatus.AlreadyExists)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @Model.Message
+                    </div>
+                }
+
+            }
+
+
+            <form asp-controller="User" asp-action="AddNewUser" method="post">
+                <div class="mb-6">
+                    <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-fullname2" class="input-group-text">
+                            <i class="bx bx-user"></i>
+                        </span>
+                        <input type="text"
+                               class="form-control"
+                               id="Username" name="Username"
+                               placeholder="John Doe"
+                               aria-label="John Doe"
+                               aria-describedby="basic-icon-default-fullname2" />
+                    </div>
+                </div>
+                 
+                <div class="mb-6">
+                    <label class="form-label" for="basic-icon-default-email">Email</label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="bx bx-envelope"></i></span>
+                        <input type="text"
+                               id="Email" name="Email"
+                               class="form-control"
+                               placeholder="john.doe"
+                               aria-label="john.doe"
+                               aria-describedby="basic-icon-default-email2" />
+                        <span id="basic-icon-default-email2" class="input-group-text">@@example.com</span>
+                    </div> 
+                </div>
+                <div class="mb-6">
+                    <label class="form-label" for="basic-icon-default-phone">Phone No</label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-phone2" class="input-group-text">
+                            <i class="bx bx-key"></i>
+                        </span>
+                        <input type="password"
+                               id="Password" required name="Password"
+                               class="form-control phone-mask"
+                               placeholder="***********"
+                               aria-label="658 799 8941"
+                               aria-describedby="basic-icon-default-phone2" />
+                    </div>
+                </div>
+                 
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model List<User>
+
+
+
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info text-center" role="alert">
+        No Data Found
+    </div>
+    return;
+}
+
+
+<div class="card">
+    <h5 class="card-header">Users List</h5>
+    <div class="table-responsive text-nowrap">
+
+
+        <form class="row g-3" asp-action="Search" asp-controller="User" method="get">
+             
+            <div class="col-auto">
+                <label for="inputPassword2" class="visually-hidden">Search</label>
+                <input type="text" class="form-control" id="query" name="query" placeholder="Enter query search">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </form>
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>User Type</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Username</td>
+                        <td>@item.Email</td>
+                        <td><span class="badge bg-label-primary me-1">@item.UserType</span></td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-action="Edit" asp-controller="User" asp-route-id="@item.Id"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" asp-action="Delete" asp-controller="User"><i class="bx bx-trash me-1"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
